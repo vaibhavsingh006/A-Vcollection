@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const port = 3000;
 const productRoutes = require('./routes/productRoutes')
 const cors = require('cors');
+const product = require('./models/product')
 
 
 app.use(express.json());
@@ -16,8 +17,10 @@ mongoose.connect('mongodb://localhost:27017/copyAVProduction')
     .then(() => console.log('mongodb connect'))
     .catch((err) => console.log('not connected - ', err))
 
-app.get('/', (req, res) => {
-    res.send('fine')
+app.get('/', async (req, res) => {
+    // let data = await product.find();
+    // res.send(data)
+    res.send('jdlkj')
 })
 
 app.use('/api', productRoutes)
