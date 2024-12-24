@@ -5,7 +5,7 @@ const protect = require('../middleware/authMiddleware')
 
 
 // PUT (Update) a product by ID
-router.put('/:id', protect, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -16,7 +16,7 @@ router.put('/:id', protect, async (req, res) => {
 });
 
 // DELETE a product by ID
-router.delete('/:id', protect, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
         if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -57,6 +57,28 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.error('Error creating product:', error);
         res.status(500).json({ message: 'Failed to create product', error });
+    }
+});
+
+
+// GET all products
+router.get('/', async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.status(200).json(products);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch products', details: err.message });
+    }
+});
+
+// GET a product by ID
+router.get('/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).json({ error: 'Product not found' });
+        res.status(200).json(product);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch product', details: err.message });
     }
 });
 
