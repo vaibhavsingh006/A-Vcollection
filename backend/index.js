@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose')
 const port = 3000;
 const productRoutes = require('./routes/productRoutes')
+const authRoutes = require('./routes/authRoutes')
+const ownerRoutes = require('./routes/ownerRoutes')
 const cors = require('cors');
 const product = require('./models/product')
 
@@ -24,6 +26,8 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/api', productRoutes)
+app.use('/auth', authRoutes)
+app.use('/owner', ownerRoutes)
 
 app.listen(port, () => {
     console.log('running')

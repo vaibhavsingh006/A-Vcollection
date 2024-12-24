@@ -28,8 +28,8 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await fetch("http://localhost:3000/clothing");
-        const response = await fetch("https://api-ecomm-clothes.vercel.app/api/clothing");
+        // const response = await fetch("https://api-ecomm-clothes.vercel.app/api/clothing");
+        const response = await fetch("http://localhost:3000/api");
         if (!response.ok) {
           throw new Error("Failed to fetch products.");
         }

@@ -13,13 +13,15 @@ import ProductPaymentPage from "./pages/ProductPaymentPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import AddProductForm from "./pages/AddProductForm";
+import SignupPage from "./pages/SignupPage";
+import OwnerSignup from "./pages/OwnerSignup";
 
 function App() {
   return (
     <ProductProvider> {/* Provides product data to all components */}
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
-        <Route path="/" element={<AddProductForm />} />
+        <Route path="/" element={<OwnerSignup />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/shop/allproductpage" element={<AllProductPage />} />
@@ -28,6 +30,7 @@ function App() {
         <Route path="/product-payment" element={<ProductPaymentPage />} />
         <Route path="/cart" element={<CartPage />} /> {/* Ensure CartPage is routed */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<SignupPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </ProductProvider>
