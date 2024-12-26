@@ -25,6 +25,8 @@ const OwnerLogiin = () => {
             });
 
             const data = await response.json();
+            console.log(data);
+
             if (response.ok) {
                 navigate('/admin');  // Redirect to homepage after successful login
             } else {
