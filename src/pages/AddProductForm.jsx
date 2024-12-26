@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 const AddProductForm = () => {
     const [product, setProduct] = useState({
         name: '',
@@ -17,7 +16,7 @@ const AddProductForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3000/admin2', {
+        fetch('http://localhost:3000/admin', {
             method: 'GET',
             credentials: 'include', // Include cookies in the request
         })
@@ -44,12 +43,6 @@ const AddProductForm = () => {
     // logout code here
     const handleLogout = async () => {
         try {
-            // const response = await axios.post('http://localhost:3000/owner/logout'); // Adjust the URL to match your backend route
-            // if (response.status === 200) {
-            //     alert('Logged out successfully');
-            //     navigate('/shop')
-            // }
-
             const response = await fetch('http://localhost:3000/logout', {
                 method: 'GET',
                 credentials: 'include', // Include credentials (like cookies) in the request

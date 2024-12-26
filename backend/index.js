@@ -50,7 +50,7 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.get('/admin2', ownerLoginCheck, (req, res) => {
+app.get('/admin', ownerLoginCheck, (req, res) => {
     res.status(200).json({ message: 'Welcome to the owner dashboard!' });
 })
 

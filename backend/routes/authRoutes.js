@@ -92,7 +92,6 @@ router.post('/register', async (req, res) => {
 // Login user and generate token
 
 router.post('/login', async (req, res) => {
-    console.log('login hits')
     try {
         let { email, password } = req.body;
         console.log('Received login request:', req.body);
@@ -105,7 +104,6 @@ router.post('/login', async (req, res) => {
 
         // Compare the provided password with the stored hashed password
         const isPasswordMatch = await bcrypt.compare(password, user.password);
-        console.log('passwordmarch result', isPasswordMatch)
         if (!isPasswordMatch) {
             return res.status(400).json({ message: 'Password does not match' });
         }
@@ -115,7 +113,6 @@ router.post('/login', async (req, res) => {
 
         // Set cookies
         res.cookie('token', token, { httpOnly: true });
-        res.cookie('owner', '', { httpOnly: true });
 
         // Send successful login response
         res.status(200).json({ message: 'Login successful', redirectTo: '/' });

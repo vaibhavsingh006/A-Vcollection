@@ -33,8 +33,8 @@ function App() {
         <Route path="/cart" element={<CartPage />} /> {/* Ensure CartPage is routed */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin2" element={<AddProductForm />} />
+        {/* <Route path="/admin" element={<AdminPage />} /> */}
+        <Route path="/admin" element={<AddProductForm />} />
         <Route path="/ownersignup" element={<OwnerSignup />} />
         <Route path="/ownerlogin" element={<OwnerLogiin />} />
       </Routes>
