@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const OwnerSignup = () => {
-    const [username, setUsername] = useState('');
+const OwnerLogiin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -10,23 +9,23 @@ const OwnerSignup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!username || !email || !password) {
+        if (!email || !password) {
             setError('All fields are required');
             return;
         }
 
-        // Make API call to register the owner
+        // Make API call to login the owner
         try {
-            const response = await fetch('http://localhost:3000/owner/register', {
+            const response = await fetch('http://localhost:3000/owner/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
+                body: JSON.stringify({ email, password }),
+                credentials: 'include',
             });
 
             const data = await response.json();
             if (response.ok) {
-                alert('owner has been created please login now')
-                navigate('/ownerlogin');  // Redirect to homepage after successful signup
+                navigate('/admin');  // Redirect to homepage after successful login
             } else {
                 setError(data.message);
             }
@@ -38,20 +37,9 @@ const OwnerSignup = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-sm">
-                <h2 className="text-2xl font-semibold text-center mb-4">Owner Signup</h2>
+                <h2 className="text-2xl font-semibold text-center mb-4">Owner Login</h2>
                 {error && <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">{error}</div>}
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="username" className="block text-gray-700">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none"
-                            placeholder="Enter your username"
-                        />
-                    </div>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700">Email Address</label>
                         <input
@@ -74,11 +62,11 @@ const OwnerSignup = () => {
                             placeholder="Enter your password"
                         />
                     </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Sign Up</button>
+                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Login</button>
                 </form>
             </div>
         </div>
     );
 };
 
-export default OwnerSignup
+export default OwnerLogiin

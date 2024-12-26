@@ -29,7 +29,7 @@ router.delete('/:id', async (req, res) => {
 // create product
 router.post('/', async (req, res) => {
     try {
-        const { name, description, image, price, size, category, newarrivals } = req.body;
+        const { name, description, image, price, size, category, newarrivals, bestselling } = req.body;
 
         // Validate required fields
         if (!name || !description || !price || !size || !category) {
@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
             size,
             category,
             newarrivals, // Optional: defaults to 'no' if not provided
+            bestselling
         });
 
         await newProduct.save();

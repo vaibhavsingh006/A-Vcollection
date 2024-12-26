@@ -31,6 +31,12 @@ const productSchema = new mongoose.Schema({
         enum: ['yes', 'no'],
         default: 'no'
     }, // Make newarrivals optional
+    bestselling: {
+        type: String,
+        enum: ['yes', 'no'],
+        default: 'no'
+    },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);

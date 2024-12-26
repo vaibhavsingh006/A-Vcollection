@@ -81,8 +81,7 @@ router.post('/register', async (req, res) => {
         // res.cookie('owner', '', { httpOnly: true }); // Optional, based on your need
 
         // Send success response with redirect information
-        res.status(201).json({ message: 'Signup successful', redirectTo: '/' });
-
+        res.status(201).json({ message: 'Signup successful', redirectTo: '/login' });
     } catch (err) {
         console.error('Error during registration:', err);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -100,27 +99,9 @@ router.post('/login', async (req, res) => {
         // Find the user by email
         let user = await User.findOne({ email: email });
 
-
-        // const storedHash = '$2b$10$XxFtNwy0ldLYdylP6am17OYPKSqBMLMoVAm2flH//fto7gyag2Vty';
-        // const plainPassword = 'aman';  // The password the user entered
-
-        // bcrypt.compare(plainPassword, storedHash, (err, result) => {
-        //     if (err) {
-        //         console.log('Error comparing password:', err);
-        //     } else {
-        //         if (result) {
-        //             console.log('Password match');
-        //         } else {
-        //             console.log('Password does not match');
-        //         }
-        //     }
-        // });
-
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-
-        console.log('User found', user);
 
         // Compare the provided password with the stored hashed password
         const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -133,8 +114,8 @@ router.post('/login', async (req, res) => {
         let token = jwt.sign({ email, id: user._id }, process.env.JWT_KEY);
 
         // Set cookies
-        res.cookie('token', token, { httpOnly: true }); // Added httpOnly for security
-        res.cookie('owner', '', { httpOnly: true }); // Optional, based on your need
+        res.cookie('token', token, { httpOnly: true });
+        res.cookie('owner', '', { httpOnly: true });
 
         // Send successful login response
         res.status(200).json({ message: 'Login successful', redirectTo: '/' });

@@ -36,9 +36,9 @@ function ShopPage() {
       if (categoryFilter === "all") return true;
       if (categoryFilter === "bestselling")
         return product.bestselling === "yes"; // Filter by best selling
-      if (categoryFilter === "men") return product.men === "yes"; // Filter by best selling
-      if (categoryFilter === "women") return product.women === "yes"; // Filter by best selling
-      if (categoryFilter === "kids") return product.kids === "yes"; // Filter by best selling
+      if (categoryFilter === "men") return product.category === "men"; // Filter by best selling
+      if (categoryFilter === "women") return product.category === "women"; // Filter by best selling
+      if (categoryFilter === "kids") return product.category === "kids"; // Filter by best selling
       return product.category.toLowerCase() === categoryFilter.toLowerCase(); // Filter by other categories
     })
     .sort((a, b) => {
@@ -149,9 +149,8 @@ function ShopPage() {
           <div className="flex justify-center items-center mt-8 space-x-4">
             <button
               onClick={handlePreviousPage}
-              className={`px-4 py-2 text-white bg-gray-700 rounded-md hover:bg-gray-800 ${
-                currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`px-4 py-2 text-white bg-gray-700 rounded-md hover:bg-gray-800 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               disabled={currentPage === 1}
             >
               Previous
@@ -161,11 +160,10 @@ function ShopPage() {
             </span>
             <button
               onClick={handleNextPage}
-              className={`px-4 py-2 text-white bg-gray-700 rounded-md hover:bg-gray-800 ${
-                currentPage === totalPages
+              className={`px-4 py-2 text-white bg-gray-700 rounded-md hover:bg-gray-800 ${currentPage === totalPages
                   ? "opacity-50 cursor-not-allowed"
                   : ""
-              }`}
+                }`}
               disabled={currentPage === totalPages}
             >
               Next
