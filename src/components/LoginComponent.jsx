@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../IMG/A&V_logo.png';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const LoginComponent = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

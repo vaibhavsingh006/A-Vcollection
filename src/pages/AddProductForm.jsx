@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AddProductForm = () => {
     const [product, setProduct] = useState({
@@ -16,7 +17,7 @@ const AddProductForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3000/admin', {
+        fetch(`${API_URL}/admin`, {
             method: 'GET',
             credentials: 'include', // Include cookies in the request
         })
@@ -43,7 +44,7 @@ const AddProductForm = () => {
     // logout code here
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/logout', {
+            const response = await fetch(`${API_URL}/logout`, {
                 method: 'GET',
                 credentials: 'include', // Include credentials (like cookies) in the request
             });

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const OwnerSignup = () => {
     const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ const OwnerSignup = () => {
 
         // Make API call to register the owner
         try {
-            const response = await fetch('http://localhost:3000/owner/register', {
+            const response = await fetch(`${API_URL}/owner/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password })
