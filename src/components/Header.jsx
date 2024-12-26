@@ -9,7 +9,7 @@ import { useProductContext } from "../contexts/ProductContext";
 import { GoDotFill } from "react-icons/go";
 
 const Header = () => {
-  const { likedProducts , cartItems } = useProductContext();
+  const { likedProducts, cartItems } = useProductContext();
 
   // console.log("Liked products count:", Object.keys(likedProducts).length);
   // console.log("Cart items count:", cartItems.length);
@@ -63,6 +63,18 @@ const Header = () => {
               className="text-normal hover:text-secondary-text"
             >
               Contact
+            </Link>
+            <Link
+              to="/login"
+              className="text-normal hover:text-secondary-text"
+            >
+              login
+            </Link>
+            <Link
+              to="/ownerlogin"
+              className="text-normal hover:text-secondary-text"
+            >
+              owner
             </Link>
           </nav>
 
@@ -127,9 +139,8 @@ const Header = () => {
         </div>
 
         <div
-          className={`fixed top-0 right-0 h-full z-50 bg-black text-white px-12 transform transition-transform duration-500 ease-in-out ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`fixed top-0 right-0 h-full z-50 bg-black text-white px-12 transform transition-transform duration-500 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <button
             className="absolute top-4 right-4 text-3xl z-1000 text-white"
