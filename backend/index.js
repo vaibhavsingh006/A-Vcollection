@@ -16,29 +16,31 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(express.json());
 
-const allowedOrigins = [
-    'http://localhost:5173', // Local frontend
-    'https://a-vcollection.vercel.app', // Deployed frontend on Vercel
-];
+// const allowedOrigins = [
+//     'http://localhost:5173', // Local frontend
+//     'https://a-vcollection.vercel.app', // Deployed frontend on Vercel
+// ];
 
-// Configure CORS middleware
+// // Configure CORS middleware
+// app.use(
+//     cors({
+//         origin: (origin, callback) => {
+//             if (!origin || allowedOrigins.includes(origin)) {
+//                 callback(null, true); // Allow request
+//             } else {
+//                 callback(new Error('Not allowed by CORS')); // Block request
+//             }
+//         },
+//         credentials: true, // Allow cookies
+//     })
+// );
+
 app.use(
     cors({
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true); // Allow request
-            } else {
-                callback(new Error('Not allowed by CORS')); // Block request
-            }
-        },
+        origin: '*', // Allow all origins
         credentials: true, // Allow cookies
     })
 );
-
-// app.use(cors({
-//     origin: 'http://localhost:5173', // Your frontend URL
-//     credentials: true,
-// }));
 
 
 

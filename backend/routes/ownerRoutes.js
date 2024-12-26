@@ -68,10 +68,13 @@ router.post('/login', async (req, res) => {
         // Generate JWT token
         const token = jwt.sign({ email, id: owner._id }, process.env.JWT_KEY, { expiresIn: '1h' });
 
+        const isProduction = process.env.NODE_ENV === 'production';
+
+
         res.cookie('owner', token, {
             httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
-            secure: false,
-            sameSite: 'Strict',
+            secure: isProduction,
+            sameSite: isProduction ? 'None' : 'Lax',
             path: '/',
         });
 
