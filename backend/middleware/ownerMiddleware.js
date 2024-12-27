@@ -4,6 +4,7 @@ module.exports = async function ownerLoginCheck(req, res, next) {
     try {
         // Check if the token exists in cookies
         const token = req.cookies.owner;
+        console.log(token)
         if (!token) {
             return res.status(401).json({ message: 'Access denied. No token provided.' });
         }

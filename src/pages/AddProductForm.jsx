@@ -69,7 +69,7 @@ const AddProductForm = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch('http://localhost:3000/api/', {
+            const res = await fetch(`${API_URL}/api`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(product),
@@ -204,8 +204,8 @@ const AddProductForm = () => {
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required
                         >
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
                         </select>
                     </div>
 

@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product')
 const protect = require('../middleware/authMiddleware')
+const ownerLoginCheck = require('../middleware/ownerMiddleware')
+const cookieParser = require('cookie-parser');
 
+
+
+router.use(cookieParser());
 
 // PUT (Update) a product by ID
 router.put('/:id', async (req, res) => {
@@ -27,7 +32,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // create product
-router.post('/', async (req, res) => {
+router.post('/', ownerLoginCheck, async (req, res) => {
     try {
         const { name, description, image, price, size, category, newarrivals, bestselling } = req.body;
 
@@ -50,7 +55,8 @@ router.post('/', async (req, res) => {
             size,
             category,
             newarrivals, // Optional: defaults to 'no' if not provided
-            bestselling
+            bestselling,
+            createdBy: req.user.id
         });
 
         await newProduct.save();

@@ -73,7 +73,7 @@ router.post('/login', async (req, res) => {
 
         res.cookie('owner', token, {
             httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
-            secure: isProduction,
+            secure: isProduction ? true : false,
             sameSite: isProduction ? 'None' : 'Lax',
             path: '/',
         });

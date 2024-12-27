@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-
+const API_URL = import.meta.env.VITE_API_URL;
 // Create the Context
 const ProductContext = createContext();
 
@@ -29,7 +29,7 @@ export const ProductProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         // const response = await fetch("https://api-ecomm-clothes.vercel.app/api/clothing");
-        const response = await fetch("http://localhost:3000/api");
+        const response = await fetch(`${API_URL}/api/`);
         if (!response.ok) {
           throw new Error("Failed to fetch products.");
         }
