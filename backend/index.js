@@ -35,13 +35,6 @@ app.use(
     })
 );
 
-// app.use(
-//     cors({
-//         origin: '*', // Allow all origins
-//         credentials: true, // Allow cookies
-//     })
-// );
-
 
 
 
