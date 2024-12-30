@@ -40,7 +40,9 @@ app.use(
 
 
 // mongoose.connect('mongodb://localhost:27017/copyAVProduction')
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+})
     .then(() => console.log('mongodb connect'))
     .catch((err) => console.log('not connected - ', err))
 
