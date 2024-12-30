@@ -18,7 +18,7 @@ app.use(express.json());
 
 const allowedOrigins = [
     'http://localhost:5173', // Local frontend
-    'https://a-vcollection.vercel.app', // Deployed frontend on Vercel
+    'https://a-vcollection-1.onrender.com', // Deployed frontend on Vercel
 ];
 
 // Configure CORS middleware
@@ -32,6 +32,8 @@ app.use(
             }
         },
         credentials: true, // Allow cookies
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
     })
 );
 
