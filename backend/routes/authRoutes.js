@@ -113,6 +113,16 @@ router.post('/login', async (req, res) => {
 
         // Set cookies
         res.cookie('token', token, { httpOnly: true });
+        // const isProduction = process.env.NODE_ENV === 'production';
+
+
+        // res.cookie('token', token, {
+        //     httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
+        //     secure: isProduction ? true : false,
+        //     sameSite: isProduction ? 'None' : 'None',
+        //     path: '/',
+        // });
+
 
         // Send successful login response
         res.status(200).json({ message: 'Login successful', redirectTo: '/' });

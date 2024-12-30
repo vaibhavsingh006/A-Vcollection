@@ -32,7 +32,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // create product
-router.post('/', ownerLoginCheck, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name, description, image, price, size, category, newarrivals, bestselling } = req.body;
 
@@ -56,7 +56,7 @@ router.post('/', ownerLoginCheck, async (req, res) => {
             category,
             newarrivals, // Optional: defaults to 'no' if not provided
             bestselling,
-            createdBy: req.user.id
+            // createdBy: req.user.id
         });
 
         await newProduct.save();

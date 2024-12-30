@@ -28,15 +28,15 @@ const productSchema = new mongoose.Schema({
     }, // Add category field
     newarrivals: {
         type: String,
-        enum: ['yes', 'no'],
+        enum: ['yes', 'no', 'Yes', 'No'],
         default: 'no'
     }, // Make newarrivals optional
     bestselling: {
         type: String,
-        enum: ['yes', 'no'],
+        enum: ['yes', 'no', 'Yes', 'No'],
         default: 'no'
     },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
+    // createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);
