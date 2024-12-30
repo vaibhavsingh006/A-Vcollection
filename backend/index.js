@@ -39,8 +39,8 @@ app.use(
 
 
 
-// mongoose.connect(process.env.MONGODB_URL)
-mongoose.connect('mongodb://localhost:27017/copyAVProduction')
+// mongoose.connect('mongodb://localhost:27017/copyAVProduction')
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log('mongodb connect'))
     .catch((err) => console.log('not connected - ', err))
 
@@ -75,4 +75,6 @@ app.use('/owner', ownerRoutes)
 
 app.listen(port, () => {
     console.log('running')
-})                          
+})
+
+module.exports = app;
