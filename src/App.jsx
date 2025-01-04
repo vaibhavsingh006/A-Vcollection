@@ -16,6 +16,8 @@ import AddProductForm from "./pages/AddProductForm";
 import SignupPage from "./pages/SignupPage";
 import OwnerSignup from "./pages/OwnerSignup";
 import OwnerLogiin from "./pages/OwnerLogiin";
+import OwnerDashboard from "./pages/OwnerDashboard";
+import EditProduct from "./pages/EditProduct";
 
 
 
@@ -36,7 +38,9 @@ function App() {
         <Route path="/admin" element={<AddProductForm />} />
         <Route path="/ownersignup" element={<OwnerSignup />} />
         <Route path="/ownerlogin" element={<OwnerLogiin />} />
-        <Route path="*" component={NotFound} />
+        <Route path="/ownerdashboard" element={<OwnerDashboard />} />
+        <Route path="/editproduct/:id" element={<EditProduct />} />
+        <Route path="*" element={NotFound} />
       </Routes>
       {/* <Route path="/admin" element={<AdminPage />} /> */}
     </ProductProvider>

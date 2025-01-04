@@ -82,6 +82,12 @@ const Header = () => {
             >
               create product
             </Link>
+            <Link
+              to="/ownerdashboard"
+              className="text-normal hover:text-secondary-text"
+            >
+              Dashboard
+            </Link>
           </nav>
 
           {/* Right Side: Icons */}

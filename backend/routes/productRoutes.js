@@ -11,14 +11,28 @@ const ownerLoginCheck = require('../middleware/ownerMiddleware')
 
 // PUT (Update) a product by ID
 router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(req.params)
+    const updatedData = req.body;
+
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!product) return res.status(404).json({ error: 'Product not found' });
-        res.json(product);
-    } catch (err) {
-        res.status(400).json({ error: err.message });
+        const updatedProduct = await Product.findByIdAndUpdate(id, updatedData, {
+            new: true, // Return the updated document
+            runValidators: true, // Validate the updates
+        });
+
+        if (!updatedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        res.json({ message: 'Product updated successfully', product: updatedProduct });
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).json({ message: 'Failed to update product' });
     }
 });
+
+
 
 // DELETE a product by ID
 router.delete('/:id', async (req, res) => {
