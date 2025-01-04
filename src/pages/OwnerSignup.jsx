@@ -20,6 +20,7 @@ const OwnerSignup = () => {
         try {
             const response = await fetch(`${API_URL}/owner/register`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password })
             });

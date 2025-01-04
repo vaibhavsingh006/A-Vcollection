@@ -51,7 +51,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.get('/', async (req, res) => {
     // let data = await product.find();
     // res.send(data)
-    res.send('jdlkj')
+    res.send('backend Connected')
 })
 
 

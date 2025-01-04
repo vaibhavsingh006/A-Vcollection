@@ -1,16 +1,19 @@
 const Owner = require('../models/owner');
+const jwt = require('jsonwebtoken');
 
-module.exports = async function ownerLoginCheck(req, res, next) {
+
+
+const ownerLoginCheck = async (req, res, next) => {
     try {
         // Check if the token exists in cookies
         const token = req.cookies.owner;
-        console.log(token)
+        // console.log(token)
         if (!token) {
             return res.status(401).json({ message: 'Access denied. No token provided.' });
         }
 
         // Verify the token (Replace `your_secret_key` with your actual JWT secret key)
-        const jwt = require('jsonwebtoken');
+
         const decoded = jwt.verify(token, process.env.JWT_KEY);
         // console.log(decoded)
         let user = await Owner.findOne({ email: decoded.email })
@@ -27,3 +30,5 @@ module.exports = async function ownerLoginCheck(req, res, next) {
         res.status(400).json({ message: 'Invalid token.' });
     }
 }
+
+module.exports = ownerLoginCheck;

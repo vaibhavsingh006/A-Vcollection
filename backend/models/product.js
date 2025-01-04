@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
         enum: ['yes', 'no', 'Yes', 'No'],
         default: 'no'
     },
-    // createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);
