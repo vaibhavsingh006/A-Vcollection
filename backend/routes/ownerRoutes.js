@@ -71,13 +71,13 @@ router.post('/login', async (req, res) => {
         const isProduction = process.env.NODE_ENV === 'production';
 
 
-        // res.cookie('owner', token, {
-        //     httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
-        //     secure: isProduction ? true : false,
-        //     sameSite: isProduction ? 'None' : 'None',
-        //     path: '/',
-        // });
-        res.cookie('owner', token, { httpOnly: true });
+        res.cookie('owner', token, {
+            httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
+            secure: isProduction ? true : false,
+            sameSite: isProduction ? 'None' : 'Lax',
+            path: '/',
+        });
+        // res.cookie('owner', token, { httpOnly: true });
 
         // Return success response with token
         res.status(200).json({ message: 'Login successful', token, redirectTo: '/admin' });
