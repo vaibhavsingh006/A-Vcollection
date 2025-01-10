@@ -10,11 +10,19 @@ const cors = require('cors');
 const product = require('./models/product')
 const ownerLoginCheck = require('./middleware/ownerMiddleware')
 const cookieParser = require('cookie-parser');
+const path = require("path");
 
 
 
 app.use(cookieParser());
 app.use(express.json());
+
+// Static files serve karna (React app ka build folder)
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../dist", "index.html"));
+});
 
 const allowedOrigins = [
     'http://localhost:5173', // Local frontend
@@ -36,9 +44,6 @@ app.use(
         allowedHeaders: ['Content-Type', 'Authorization'],
     })
 );
-
-
-
 
 
 // mongoose.connect('mongodb://localhost:27017/copyAVProduction')
