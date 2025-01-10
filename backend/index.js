@@ -18,10 +18,10 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Static files serve karna (React app ka build folder)
-app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, "./")));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist", "index.html"));
+    res.sendFile(path.join(__dirname, "./", "index.html"));
 });
 
 const allowedOrigins = [
