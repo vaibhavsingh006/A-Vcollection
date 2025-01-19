@@ -25,16 +25,39 @@ const productSchema = new mongoose.Schema({
         type: String,
         enum: ['men', 'women', 'kids', 'others'],
         required: true
-    }, // Add category field
+    },
     newarrivals: {
         type: String,
         enum: ['yes', 'no', 'Yes', 'No'],
         default: 'no'
-    }, // Make newarrivals optional
+    },
     bestselling: {
         type: String,
         enum: ['yes', 'no', 'Yes', 'No'],
         default: 'no'
+    },
+    stock: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    variations: [
+        {
+            size: {
+                type: String,
+            },
+            color: {
+                type: String,
+            },
+            stock: {
+                type: Number,
+                default: 0,
+            }
+        }
+    ],
+    discount: {
+        type: Number,
+        default: 0,
     },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Owner', required: true },
 }, { timestamps: true });

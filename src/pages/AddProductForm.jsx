@@ -12,7 +12,8 @@ const AddProductForm = () => {
         size: '',
         category: 'men',
         newarrivals: '',
-        bestselling: 'No', // Default value for Best Selling
+        bestselling: 'No',
+        stock: ''
     });
     const navigate = useNavigate();
 
@@ -87,6 +88,7 @@ const AddProductForm = () => {
                 category: 'men',
                 newarrivals: '',
                 bestselling: 'No',
+                stock: '',
             });
         } catch (error) {
             console.error('Error creating product:', error);
@@ -208,6 +210,18 @@ const AddProductForm = () => {
                             <option value="no">No</option>
                             <option value="yes">Yes</option>
                         </select>
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 mb-2">Stock</label>
+                        <input
+                            type="number"
+                            name="stock"
+                            value={product.stock}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter product size"
+                            required
+                        />
                     </div>
 
                     <button

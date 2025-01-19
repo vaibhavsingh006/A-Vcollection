@@ -8,8 +8,14 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     cart: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "product",
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product",
+            },
+            quantity: {
+                type: Number,
+                default: 1,
+            },
         },
     ],
     orders: [
@@ -24,22 +30,21 @@ const userSchema = new mongoose.Schema({
                 type: Date,
                 default: Date.now,
             },
+            shippingAddress: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Address",
+            },
         },
     ],
     contact: Number,
     profilePicture: Buffer,
+    addresses: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Address",
+        },
+    ],
 });
-
-// // Hash password before saving
-// userSchema.pre("save", async function (next) {
-//     if (!this.isModified("password")) return next();
-//     this.password = await bcrypt.hash(this.password, 10);
-// });
-
-// // Compare password
-// userSchema.methods.matchPassword = async function (password) {
-//     return await bcrypt.compare(password, this.password);
-// };
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

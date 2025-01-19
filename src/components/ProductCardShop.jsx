@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useProductContext } from "../contexts/ProductContext"; // Import the context
 import "react-toastify/dist/ReactToastify.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const ProductCardShop = ({ product }) => {
   const {
@@ -14,6 +15,7 @@ const ProductCardShop = ({ product }) => {
   const [showFullTitle, setShowFullTitle] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   // Memoize truncateText function to avoid unnecessary recalculations
   const truncateText = useCallback((text, charLimit) => {
@@ -81,12 +83,42 @@ const ProductCardShop = ({ product }) => {
 
   const handleDescriptionToggle = () => setIsExpanded((prev) => !prev);
 
-  const handleAddToCart = () => {
-    addToCart(product); // Add product to cart when button is clicked
-    toast("Product added to cart!", {
-      type: "success", // Show success toast for adding to cart
-    });
+  // const handleAddToCart = () => {
+  //   addToCart(product); // Add product to cart when button is clicked
+  //   toast("Product added to cart!", {
+  //     type: "success", // Show success toast for adding to cart
+  //   });
+  // };
+  const handleAddToCart = async (productId) => {
+    console.log(productId);
+    try {
+      const response = await fetch(`${API_URL}/api/addtocart/${productId}`, {
+        method: 'GET', // Since your route uses `GET`
+        credentials: 'include',
+      });
+
+      if (response.status === 401) {
+        alert('You must have account !'); // Show message
+        navigate('/register'); // Redirect to signup page
+      }
+      if (!response.ok) {
+        // Handle errors (e.g., 400 or 500)
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Something went wrong");
+      }
+
+      const data = await response.json();
+      console.log(data)
+      toast("Product added to cart!", {
+        type: "success", // Show success toast for adding to cart
+      });
+    } catch (error) {
+      console.error("Error adding product to cart:", error.message);
+      alert(error.message); // Show error message
+    }
   };
+
+
 
   return (
     <div className="max-w-sm w-full bg-white border border-gray-200 overflow-hidden relative rounded-xl">
@@ -110,9 +142,8 @@ const ProductCardShop = ({ product }) => {
       <div className="absolute right-2 sm:right-4 top-0">
         <button
           onClick={() => handleLikeToggle(product._id)}
-          className={`text-2xl mt-2 sm:mt-4 ${
-            likedProducts[product._id] ? "text-red-500" : "text-gray-400"
-          }`}
+          className={`text-2xl mt-2 sm:mt-4 ${likedProducts[product._id] ? "text-red-500" : "text-gray-400"
+            }`}
           type="button"
           aria-label="Toggle like"
         >
@@ -151,12 +182,14 @@ const ProductCardShop = ({ product }) => {
             </p>
           </div>
           <div>
+            {/* <Link to={`/addtocart/${product._id}`}> */}
             <button
+              onClick={() => handleAddToCart(product._id)}
               className="bg-accent text-[12px] sm:text-sm text-gray-600 font-semibold py-2 px-2 sm:px-4 hover:bg-White-text hover:text-button-hover transition-colors duration-300 rounded-lg"
-              onClick={handleAddToCart}
             >
               Add to Cart
             </button>
+            {/* </Link> */}
           </div>
         </div>
       </div>

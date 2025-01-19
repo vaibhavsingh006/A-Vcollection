@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ email, id: owner._id }, process.env.JWT_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ email, id: owner._id }, process.env.JWT_KEY);
 
         const isProduction = process.env.NODE_ENV === 'production';
 
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
         // res.cookie('owner', token, { httpOnly: true });
 
         // Return success response with token
-        res.status(200).json({ message: 'Login successful', token, redirectTo: '/admin' });
+        res.status(200).json({ message: 'Owner Login successful', token, redirectTo: '/admin' });
 
     } catch (err) {
         res.status(500).json({ message: 'Server Error' });

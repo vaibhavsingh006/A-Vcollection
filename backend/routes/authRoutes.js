@@ -109,19 +109,17 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate a JWT token
-        let token = jwt.sign({ email, id: user._id }, process.env.JWT_KEY);
+        const token = jwt.sign({ email, id: user._id }, process.env.JWT_KEY);
 
-        // Set cookies
-        res.cookie('token', token, { httpOnly: true });
-        // const isProduction = process.env.NODE_ENV === 'production';
+        const isProduction = process.env.NODE_ENV === 'production';
 
 
-        // res.cookie('token', token, {
-        //     httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
-        //     secure: isProduction ? true : false,
-        //     sameSite: isProduction ? 'None' : 'None',
-        //     path: '/',
-        // });
+        res.cookie('token', token, {
+            httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
+            secure: isProduction ? true : false,
+            sameSite: isProduction ? 'None' : 'Lax',
+            path: '/',
+        });
 
 
         // Send successful login response

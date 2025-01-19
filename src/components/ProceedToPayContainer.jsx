@@ -7,10 +7,56 @@ const ProceedToPayContainer = () => {
   const [proceedToPayProductfind, setProceedToPayProductfind] = useState(null);
   const { products, proceedToPayProduct } = useProductContext();
 
-//   console.log(
-//     "proceedToPayProduct in ProceedToPayContainer",
-//     proceedToPayProduct
-//   );
+  //   console.log(
+  //     "proceedToPayProduct in ProceedToPayContainer",
+  //     proceedToPayProduct
+  //   );
+
+
+  const [address, setAddress] = useState({
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    state: '',
+    pincode: '',
+    contactNumber: '',
+    isPrimary: false,
+  });
+
+  // const history = useHistory();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAddress({ ...address, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/add-address', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(address),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Address added successfully');
+        // history.push('/checkout'); // Redirect to checkout page
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+
 
   useEffect(() => {
     // Find the product based on the productId from the context
@@ -25,7 +71,7 @@ const ProceedToPayContainer = () => {
     if (selectedProceedToPayProduct) {
       setProceedToPayProductfind(selectedProceedToPayProduct);
     } else {
-    //   console.log("Product not found.");
+      //   console.log("Product not found.");
     }
   }, [proceedToPayProduct, products]); // Watch for changes in proceedToPayProduct and products
 
